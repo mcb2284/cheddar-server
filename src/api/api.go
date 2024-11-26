@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 
+	"github.com/cheddar/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,6 +12,13 @@ type album struct {
     Title  string  `json:"title"`
     Artist string  `json:"artist"`
     Price  float64 `json:"price"`
+}
+
+type user struct {
+	ID int `json:"user_id"`
+	User string `json:"user_name"`
+	First string `json:"first_name"`
+	Last string `json:"last_name"`
 }
 
 // albums slice to seed record album data.
@@ -25,8 +33,32 @@ func Server(){
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
+
+
+	router.POST("/user/:id", createUser)
+	router.GET("/user/:id", getUser)
+	router.PATCH("/user/:id", updateUser)
+	router.DELETE("/user/:id", deleteUser)
+
+	router.Run("localhost:8080")
 }
 
+
+func createUser(c *gin.Context){
+ return
+}
+func getUser(c *gin.Context){
+	
+	user := database.GetUser(c.Param("id"))
+
+	c.IndentedJSON(http.StatusOK, user)
+}
+func updateUser(c *gin.Context){
+	return
+}
+func deleteUser(c *gin.Context){
+	return
+}
 
 
 func getAlbums(c *gin.Context){
