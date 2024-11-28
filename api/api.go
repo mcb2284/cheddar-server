@@ -32,6 +32,7 @@ func Server(){
 
 	router.POST("/user", createUser)
 	router.GET("/user/:id", getUser)
+	router.GET("/name/:name", getUserByName)
 	router.PATCH("/user/:id", updateUser)
 	router.DELETE("/user/:id", deleteUser)
 
@@ -54,6 +55,15 @@ func getUser(c *gin.Context){
 
 	c.IndentedJSON(http.StatusOK, user)
 }
+
+func getUserByName(c *gin.Context){
+
+	user := database.GetUserByName(c.Param("name"))
+
+	c.IndentedJSON(http.StatusOK, user)
+
+}
+
 func updateUser(c *gin.Context){
 	return
 }

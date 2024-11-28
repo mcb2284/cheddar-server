@@ -67,6 +67,37 @@ func getUser(db *sql.DB, id string) string {
 	return user
 }
 
+func GetUserByName(name string) string {
+	return getUserByName(db, name)
+}
+
+
+func getUserByName(db *sql.DB, name string) string{
+	result, err := db.Query("SELECT * FROM users WHERE first_name = ?", name)
+
+	if err != nil{
+		panic(err)
+	}
+	var user_id int
+	var user string
+	var first string
+	var last string
+
+	if result.Next(){
+		err = result.Scan(&user_id, &user, &first, &last)
+	} else {
+		fmt.Println("Nothing found here ...")
+	}
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Id: %d User: %s First: %s Last: %s\n", user_id, user, first, last)
+	
+	return user
+
+}
+
 func CreateUser (user types.User){
 
 	createUser(db, user)
