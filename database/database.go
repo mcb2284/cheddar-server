@@ -130,3 +130,31 @@ func createUser(db *sql.DB, user types.User){
 
 		fmt.Printf("ID = %d, Row = %d\n", lastId, rowCnt)
 	}
+
+
+func deleteUser(db *sql.DB, id string){
+	stmt, err := db.Prepare("DELETE FROM users WHERE user_id = ?")
+
+	if err != nil{
+		panic(err)
+	}
+
+	res, err := stmt.Exec(id)
+
+	if err != nil{
+		panic(err)
+	}
+
+	lastId, err := res.LastInsertId()
+	if err != nil {
+		panic(err)
+	}
+	rowCnt, err := res.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("ID = %d, Row = %d\n", lastId, rowCnt)
+	
+
+}
