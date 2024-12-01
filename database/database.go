@@ -132,6 +132,10 @@ func createUser(db *sql.DB, user types.User){
 	}
 
 
+func DeleteUser(id string){
+	deleteUser(db, id)
+}
+
 func deleteUser(db *sql.DB, id string){
 	stmt, err := db.Prepare("DELETE FROM users WHERE user_id = ?")
 

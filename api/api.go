@@ -68,7 +68,10 @@ func updateUser(c *gin.Context){
 	return
 }
 func deleteUser(c *gin.Context){
-	return
+
+	database.DeleteUser(c.Param("id"))
+
+	c.IndentedJSON(http.StatusOK, "Deleted")
 }
 
 
