@@ -6,3 +6,10 @@ type User struct {
 	First string `json:"first_name"`
 	Last string `json:"last_name"`
 }
+
+type BankAcct struct {
+	ID int `json:"user_id"`
+	Balance string `json:"balance"`
+	Deposits []string
+	Withdrawls []string
+}
