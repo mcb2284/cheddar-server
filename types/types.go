@@ -13,3 +13,10 @@ type BankAcct struct {
 	Deposits []string
 	Withdrawls []string
 }
+
+type CreditCard struct {
+	ID int `json:"user_id"`
+	Balance string `json:"balance"`
+	CreditAvalible string `json:"credit_avalible"`
+	Apr string `json:"apr"`
+}
